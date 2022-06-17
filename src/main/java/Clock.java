@@ -21,7 +21,19 @@ public class Clock {
     }
 
     public void incrementFortyFive() {
+        int hoursDifference = this.hours;
+        int minuteDifference = this.minutes - 45;
 
+        if (minuteDifference < 0) {
+            hoursDifference -= 1;
+            minuteDifference = 60 - Math.abs(minuteDifference);
+        }
+        if (hoursDifference < 0) {
+            hoursDifference = 24 - Math.abs(hoursDifference);
+        }
+
+        this.minutes = minuteDifference;
+        this.hours = hoursDifference;
     }
 
     public int getHours() {
