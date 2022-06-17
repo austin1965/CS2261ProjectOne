@@ -2,25 +2,21 @@ public class Clock {
     private int hours;
     private int minutes;
 
-    public Clock(int hours, int minutes){
-        try {
-            if (hours < 0 || hours > 24) {
-                throw new Exception("Invalid value for hours. Must be greater than 0 and less than 24.");
-            }
-            if (minutes < 0 || minutes > 60) {
-                throw new Exception("Invalid value for minutes. Must be greater than 0 and less than 60.");
-            }
+    public Clock(int hours, int minutes) throws Exception {
 
-            this.hours = hours;
-            this.minutes = minutes;
+        if (hours < 0 || hours > 24) {
+            throw new Exception("Invalid value for hours. Must be greater than 0 and less than 24.");
         }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
+        if (minutes < 0 || minutes > 60) {
+            throw new Exception("Invalid value for minutes. Must be greater than 0 and less than 60.");
         }
+
+        this.hours = hours;
+        this.minutes = minutes;
 
     }
 
-    public void incrementFortyFive() {
+    public void decrementFortyFive() {
         int hoursDifference = this.hours;
         int minuteDifference = this.minutes - 45;
 
@@ -34,6 +30,10 @@ public class Clock {
 
         this.minutes = minuteDifference;
         this.hours = hoursDifference;
+    }
+
+    public String formattedTime() {
+        return String.format("%2d %2d", this.hours, this.minutes);
     }
 
     public int getHours() {

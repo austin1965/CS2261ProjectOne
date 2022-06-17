@@ -1,21 +1,47 @@
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 public class Main {
 
     static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int userHours;
-        int userMinutes;
+        String userHours;
+        String userMinutes;
 
-        System.out.print("Input current time (format HH MM): ");
-        userHours = scanner.nextInt();
-        userMinutes = scanner.nextInt();
+        System.out.println("Hello Steve. Let's set your alarm 45 minutes early.");
+        System.out.print("Input intended wake-up time (format 'HH MM'): ");
 
-        Clock userClock = new Clock(userHours, userMinutes);
-        userClock.incrementFortyFive();
+        try {
+            userHours = scanner.next();
+            userMinutes = scanner.next();
 
-        System.out.println(userClock.getHours() + " " + userClock.getMinutes());
+            for (int i = 0; i < userHours.length(); ++i) {
+                if (!Character.isDigit(userHours.charAt(i))) {
+                    throw new Exception("Input value is not a digit.");
+                }
+            }
+
+            for (int i = 0; i < userMinutes.length(); ++i) {
+                if (!Character.isDigit(userMinutes.charAt(i))) {
+                    throw new Exception("Input value is not a digit.");
+                }
+            }
+
+            Clock userClock = new Clock(parseInt(userHours), parseInt(userMinutes));
+            userClock.decrementFortyFive();
+
+            System.out.println(userClock.formattedTime());
+        }
+        catch(Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+
+
+
+
+
 
     }
 }
