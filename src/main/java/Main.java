@@ -19,13 +19,13 @@ public class Main {
 
             for (int i = 0; i < userHours.length(); ++i) {
                 if (!Character.isDigit(userHours.charAt(i))) {
-                    throw new Exception("Input value is not a digit.");
+                    throw new Exception("Input hour value not interpreted as digit.");
                 }
             }
 
-            for (int i = 0; i < userMinutes.length(); ++i) {
-                if (!Character.isDigit(userMinutes.charAt(i))) {
-                    throw new Exception("Input value is not a digit.");
+            for (int j = 0; j < userMinutes.length(); ++j) {
+                if (!Character.isDigit(userMinutes.charAt(j))) {
+                    throw new Exception("Input minute value not interpreted as digit.");
                 }
             }
 
@@ -37,11 +37,5 @@ public class Main {
         catch(Exception exception) {
             System.out.println(exception.getMessage());
         }
-
-
-
-
-
-
     }
 }
