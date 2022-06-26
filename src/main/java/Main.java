@@ -1,41 +1,44 @@
+import clock.Clock;
+import clock.ClockBuilder;
+
 import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
-
 public class Main {
+    /* Main program loop for user interaction with clock object. */
 
-    static final Scanner scanner = new Scanner(System.in);
+    // Member variables
+
+    static Scanner scanner = new Scanner(System.in);
+
+    // Member methods
 
     public static void main(String[] args) {
-        String userHours;
-        String userMinutes;
+        boolean settingClock = true;
 
-        System.out.println("Hello Steve. Let's set your alarm 45 minutes early.");
-        System.out.print("Input intended wake-up time (format 'HH MM'): ");
 
-        try {
-            userHours = scanner.next();
-            userMinutes = scanner.next();
+        while (settingClock) {
+            String userInput = "";
 
-            for (int i = 0; i < userHours.length(); ++i) {
-                if (!Character.isDigit(userHours.charAt(i))) {
-                    throw new Exception("Input hour value not interpreted as digit.");
-                }
+            System.out.println("Hello Steve. Let's set your alarm " + Clock.USER_DECREMENT + " minutes early.");
+            System.out.print("Input intended wake-up time (format '" + ClockBuilder.EXPECTED_USER_FORMAT + "'): ");
+
+            try {
+                Clock userClock = ClockBuilder.clockBuilder();
+                userClock.decrementTime();
+                System.out.println(userClock.formattedTime());
+            }
+            catch (Exception exception) {
+                System.out.println(exception.getMessage());
             }
 
-            for (int j = 0; j < userMinutes.length(); ++j) {
-                if (!Character.isDigit(userMinutes.charAt(j))) {
-                    throw new Exception("Input minute value not interpreted as digit.");
-                }
+            System.out.println("Continue? If you would like to quit, press 'Q'. Press anything else to continue");
+            userInput = scanner.nextLine();
+
+            if (userInput.equals("Q") || userInput.equals("q")) {
+                settingClock = false;
             }
-
-            Clock userClock = new Clock(parseInt(userHours), parseInt(userMinutes));
-            userClock.decrementFortyFive();
-
-            System.out.println(userClock.formattedTime());
         }
-        catch(Exception exception) {
-            System.out.println(exception.getMessage());
-        }
+        System.out.println("Exiting program.");
+
     }
 }
